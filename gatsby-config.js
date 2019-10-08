@@ -75,4 +75,5 @@ module.exports = {
       },
     },
   ],
+  pathPrefix: "/sethdavis512.github.io",
 }
