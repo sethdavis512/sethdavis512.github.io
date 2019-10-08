@@ -1,1 +1,3 @@
-# A Dev and his Blog
+# Tech with Seth
+
+Site & Blog
