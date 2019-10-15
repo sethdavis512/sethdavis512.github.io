@@ -1,10 +1,10 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
+import React from 'react'
+import { Link, graphql } from 'gatsby'
 
-import Bio from "../components/bio"
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+import Bio from '../components/bio'
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import { rhythm } from '../utils/typography'
 
 class BlogIndex extends React.Component {
     render() {
@@ -22,10 +22,13 @@ class BlogIndex extends React.Component {
                             <header>
                                 <h3
                                     style={{
-                                        marginBottom: rhythm(1 / 4),
+                                        marginBottom: rhythm(1 / 4)
                                     }}
                                 >
-                                    <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
+                                    <Link
+                                        style={{ boxShadow: `none` }}
+                                        to={node.fields.slug}
+                                    >
                                         {title}
                                     </Link>
                                 </h3>
@@ -34,7 +37,9 @@ class BlogIndex extends React.Component {
                             <section>
                                 <p
                                     dangerouslySetInnerHTML={{
-                                        __html: node.frontmatter.description || node.excerpt,
+                                        __html:
+                                            node.frontmatter.description ||
+                                            node.excerpt
                                     }}
                                 />
                             </section>
@@ -50,26 +55,26 @@ class BlogIndex extends React.Component {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            description
-          }
+    query {
+        site {
+            siteMetadata {
+                title
+            }
         }
-      }
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+            edges {
+                node {
+                    excerpt
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        date(formatString: "MMMM DD, YYYY")
+                        title
+                        description
+                    }
+                }
+            }
+        }
     }
-  }
 `

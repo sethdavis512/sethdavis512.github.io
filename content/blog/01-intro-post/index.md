@@ -1,7 +1,7 @@
 ---
 title: Howdy y'all!
-date: "2019-10-07T12:00:00.000Z"
-description: "Welcome to my site"
+date: '2019-10-07T12:00:00.000Z'
+description: 'Welcome to my site'
 ---
 
 Hello 👋🏻 Welcome to Tech with Seth!
