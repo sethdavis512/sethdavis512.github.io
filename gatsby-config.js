@@ -2,7 +2,7 @@ module.exports = {
     siteMetadata: {
         title: `Tech with Seth`,
         author: `Seth Davis`,
-        description: `A starter blog demonstrating what Gatsby can do.`,
+        description: `A tech blog by Seth Davis.`,
         siteUrl: 'https://www.techwithseth.com/',
         social: {
             codepen: `sethdavis512`,
@@ -26,9 +26,10 @@ module.exports = {
             }
         },
         {
-            resolve: `gatsby-transformer-remark`,
+            resolve: `gatsby-plugin-mdx`,
             options: {
-                plugins: [
+                extensions: ['.md', '.mdx'],
+                gatsbyRemarkPlugins: [
                     {
                         resolve: `gatsby-remark-images`,
                         options: {
@@ -59,8 +60,8 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `Gatsby Starter Blog`,
-                short_name: `GatsbyJS`,
+                name: `Tech with Seth Blog`,
+                short_name: `TWS`,
                 start_url: `/`,
                 background_color: `#ffffff`,
                 theme_color: `#663399`,
