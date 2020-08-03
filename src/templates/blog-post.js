@@ -5,11 +5,11 @@ import { MDXRenderer } from 'gatsby-plugin-mdx'
 import Bio from '../components/bio'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import { rhythm, scale } from '../utils/typography'
 
 class BlogPostTemplate extends React.Component {
     render() {
         const post = this.props.data.mdx
+        console.log('post.frontmatter', post.frontmatter)
         const siteTitle = this.props.data.site.siteMetadata.title
         const { previous, next } = this.props.pageContext
 
@@ -21,61 +21,60 @@ class BlogPostTemplate extends React.Component {
                 />
                 <article>
                     <header>
-                        <h1
-                            style={{
-                                marginTop: rhythm(1),
-                                marginBottom: 0
-                            }}
-                        >
-                            {post.frontmatter.title}
-                        </h1>
+                        <h1 className="title is-1">{post.frontmatter.title}</h1>
                         <p
                             style={{
-                                ...scale(-1 / 5),
-                                display: `block`,
-                                marginBottom: rhythm(1)
+                                marginBottom: post.frontmatter.updated
+                                    ? '0.5rem'
+                                    : '2rem'
                             }}
                         >
-                            {post.frontmatter.date}
+                            Posted: {post.frontmatter.date}
                         </p>
+                        {post.frontmatter.updated && (
+                            <p style={{ marginBottom: '2rem' }}>
+                                Updated: {post.frontmatter.updated}
+                            </p>
+                        )}
                     </header>
-                    <MDXRenderer>{post.body}</MDXRenderer>
-                    <hr
-                        style={{
-                            marginBottom: rhythm(1)
-                        }}
-                    />
+                    <div className="content">
+                        <MDXRenderer>{post.body}</MDXRenderer>
+                    </div>
                     <footer>
                         <Bio />
                     </footer>
                 </article>
 
-                <nav>
-                    <ul
-                        style={{
-                            display: `flex`,
-                            flexWrap: `wrap`,
-                            justifyContent: `space-between`,
-                            listStyle: `none`,
-                            padding: 0
-                        }}
-                    >
+                <nav style={{ marginTop: '2rem' }}>
+                    <ul>
                         <li>
                             {previous && (
-                                <Link to={previous.fields.slug} rel="prev">
-                                    ← {previous.frontmatter.title}
+                                <Link
+                                    className="button is-default"
+                                    to={previous.fields.slug}
+                                    rel="prev"
+                                >
+                                    ← Go to: {previous.frontmatter.title}
                                 </Link>
                             )}
                         </li>
                         <li>
                             {next && (
-                                <Link to={next.fields.slug} rel="next">
-                                    {next.frontmatter.title} →
+                                <Link
+                                    className="button is-default"
+                                    to={next.fields.slug}
+                                    rel="next"
+                                >
+                                    Go to: {next.frontmatter.title} →
                                 </Link>
                             )}
                         </li>
                     </ul>
                 </nav>
+                <script
+                    async
+                    src="https://static.codepen.io/assets/embed/ei.js"
+                ></script>
             </Layout>
         )
     }
@@ -98,6 +97,7 @@ export const pageQuery = graphql`
             frontmatter {
                 title
                 date(formatString: "MMMM DD, YYYY")
+                updated(formatString: "MMMM DD, YYYY")
                 description
             }
         }

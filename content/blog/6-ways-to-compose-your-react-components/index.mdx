@@ -1,0 +1,207 @@
+---
+title: 6 Ways to Compose your React Components
+date: '2020-08-02T12:00:00.000Z'
+updated: '2020-08-03T12:00:00.000Z'
+description: 'Compose your React components together for greater flexibility and reusability.'
+---
+
+import Message from '../../../src/components/message'
+
+<Message className="is-info">
+    <strong>tl;dr</strong> - Compose your React components together for greater
+    flexibility and reusability.
+</Message>
+
+## Intro
+
+I'm very passionate about composition. Its a core principle of React and if leveraged properly, it can make building applications much easier. I hope after reading this article you will gain an awareness of the different ways to compose your components. Let's take a look.
+
+### A common approach
+
+I call it the "tunnel" approach. Let's say you want to have an `Earth` component. Each layer of the `Earth` is a component. One might create an `Earth` component, embed a `Crust` component inside that component. Inside the `Crust` component, embed a `Mantle` component so on and so forth. This comes with a few drawbacks.
+
+#### Pros
+
+-   None
+
+#### Cons
+
+-   Abstracts/hides components
+-   Jumping from component to component can be taxing
+-   Prop passing can become inflated
+
+<CodePen codePenId="XWmwRzY" />
+
+### Prop drilling example
+
+If you find yourself passing props in this fashion, try to leverage composition and/or break your components down into smaller ones in order to limit prop passing.
+
+<CodePen codePenId="jOWbmPa" />
+
+## Types of composition
+
+Instead of tunneling there are a variety of ways we can compose components together.
+
+### 1. Children prop ([React docs](https://reactjs.org/docs/jsx-in-depth.html#children-in-jsx))
+
+Using the children prop is React's foundational way of composition. The children prop can and should be combined with other forms of composition (i.e. Specialization). Use the children prop to pass child elements directly into the output of the parent.
+
+<Message>
+    In the example below, we solve the prop drilling issue by leveraging
+    composition and passing the function directly to the component instead of
+    passing it through multiple components.
+</Message>
+
+**Usage Notes**
+
+The children prop is a foundational technique to compose components - always use the children props when you can.
+
+#### Pros
+
+-   Declarative
+    -   Make your code more predictable and easier to debug
+    -   Wins over the "tunnel" method (above) due to visual representation of how components are composed.
+-   Flexible
+    -   Components can easily be reordered
+
+#### Cons
+
+-   None
+
+<CodePen codePenId="KKdLmGy" />
+
+### 2. Specialization ([React docs](https://reactjs.org/docs/composition-vs-inheritance.html))
+
+A specialized component is one that composes several small components together to form a larger, more complete component. Note how the `Earth` component contains all of the additional layers within it while the inner layers are still nested within each other like the example above. Here we're combining the two styles of composition.
+
+For the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) fans out there, a "specialized" component would be your "molecules" and/or "organisms".
+
+**Usage Notes**
+
+This method of composition is very common and should be used regularly along with the `children` prop.
+
+#### Pros
+
+-   Portable/Reusable
+    -   Everything you need is contained in one component
+    -   No need to repeat yourself
+-   Pairs well with the children prop
+
+#### Cons
+
+-   Less flexible
+    -   May contain unwanted components
+
+<CodePen codePenId="MWaLQwB" />
+
+### 3. Prop-defined composition ([React docs](https://reactjs.org/docs/composition-vs-inheritance.html))
+
+Using a prop, you can define where you want your sub components to live.
+
+In the example below, the `SolarSystem` component has a left and right prop defining where the passed in components will be composed.
+
+**Usage Notes**
+
+This method is helpful when you're wanting to constrict where elements can be placed. Helpful for layout-based components - should be used with discretion.
+
+#### Pros
+
+-   Declarative
+    -   Make your code more predictable
+-   Useful for layout components
+-   Can be combined with children prop and specialization
+
+#### Cons
+
+-   Less flexible
+    -   Props or "slots" restrict where components live
+-   Too many props can make the component API confusing
+
+<CodePen codePenId="bGVyqvX" />
+
+### 4. Higher order components ([React docs](https://reactjs.org/docs/higher-order-components.html))
+
+A more advanced technique used to share behavior between components.
+
+In this example we've given `Earth` the ability to track the mouse cursor while hovering over the component.
+
+**Usage Notes**
+
+While this was a very popular way to share behaviors between components, in my opinion, it is no longer the method of choice. Use with caution as it can easily be overused.
+
+#### Pros
+
+-   Easily enhance/share functionality with other component
+-   Pairs well with specialized components
+
+#### Cons
+
+-   Passed props are implicit dependencies
+    -   It can get confusing to understand where props are coming from vs directly importing the behavior you depend on in the components that use it.
+-   Using lots of HOCs with lots of props can cause prop collisions ([Source](https://medium.com/javascript-scene/do-react-hooks-replace-higher-order-components-hocs-7ae4a08b7b58))
+
+<CodePen codePenId="RwWmgLp" />
+
+### 5. Render props ([React docs](https://reactjs.org/docs/render-props.html))
+
+This technique is very similar to a higher order component in that it too shares behavior.
+
+In this example we've replicated what's happening in the HOC example but are composing it together via render props.
+
+**Usage Notes**
+
+An excellent way to reuse or share behavior.
+
+#### Pros
+
+-   Declarative
+    -   Easier to read/understand over HOC
+-   Pairs well with specialized components
+
+#### Cons
+
+-   When trying to nest multiple render props, it can get gnarly.
+
+<CodePen codePenId="pojmroX" />
+
+### 6. Custom Hooks ([React docs](https://reactjs.org/docs/hooks-intro.html))
+
+The latest and greatest way to compose the same behavior across components using hooks.
+
+In this example we've replicated what's happening in the HOC and the render prop example using a custom hook. The `useCoordinates` hook is a simple function that composes React's `useState` function. It keeps track of the user's mouse location. The second item we return from our custom hook is an `onMouseOver` handler that gets passed to the component we want to enable with this behavior.
+
+**Usage Notes**
+
+The best way to share functionality with other components, its function based and makes writing components a delight!
+
+#### Pros
+
+-   Highly portable
+    -   Share functionality across components
+-   Works well with an function component
+-   Can be mixed and match with the other styles of composition
+    -   Children prop
+    -   Specialization
+    -   Prop-defined
+
+#### Cons
+
+-   The "[Rules of Hooks](https://reactjs.org/docs/hooks-overview.html#rules-of-hooks)" have to be respected
+
+<CodePen codePenId="oNbXKPO" />
+
+## In summary...
+
+Adding composition to your React apps will greatly enhance your components flexibility and reusability. When building, my suggestion is to mix and match composition styles to best suite your needs. I tend to gravitate towards using the children prop, specialized components, and custom hooks. I find this combo to be concise. Its all function based, there's no odd syntax. Do you have a favorite combination? Let me know in the comments!
+
+### Additional examples
+
+-   [React.Children() API Example](https://codepen.io/sethdavis512/pen/rNORLON) ([React docs](https://reactjs.org/docs/react-api.html#reactchildren))
+-   [Component Carousel](https://codepen.io/sethdavis512/pen/GLvZBV)
+
+### Additional links
+
+[A deep dive into children in React](https://mxstbr.blog/2017/02/react-children-deepdive/)
+[When to NOT use Render Props](https://kentcdodds.com/blog/when-to-not-use-render-props)
+[[VIDEO] Never Write Another HOC](https://www.youtube.com/watch?v=BcVAq3YFiuc&feature=youtu.be)
+[[VIDEO] Fun with Hooks](https://www.youtube.com/watch?v=1jWS7cCuUXw)

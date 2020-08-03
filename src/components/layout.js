@@ -1,69 +1,57 @@
 import React from 'react'
 import { Link } from 'gatsby'
-
-import { rhythm, scale } from '../utils/typography'
+import '../styles/bulma.min.css'
+import '../styles/main.css'
 
 class Layout extends React.Component {
     render() {
-        const { location, title, children } = this.props
-        const rootPath = `${__PATH_PREFIX__}/`
-        let header
+        const { children } = this.props
 
-        if (location.pathname === rootPath) {
-            header = (
-                <h1
-                    style={{
-                        ...scale(1.5),
-                        marginBottom: rhythm(1.5),
-                        marginTop: 0
-                    }}
-                >
-                    <Link
-                        style={{
-                            boxShadow: `none`,
-                            textDecoration: `none`,
-                            color: `inherit`
-                        }}
-                        to={`/`}
-                    >
-                        {title}
-                    </Link>
-                </h1>
-            )
-        } else {
-            header = (
-                <h3
-                    style={{
-                        fontFamily: `Montserrat, sans-serif`,
-                        marginTop: 0
-                    }}
-                >
-                    <Link
-                        style={{
-                            boxShadow: `none`,
-                            textDecoration: `none`,
-                            color: `inherit`
-                        }}
-                        to={`/`}
-                    >
-                        {title}
-                    </Link>
-                </h3>
-            )
-        }
         return (
-            <div
-                style={{
-                    marginLeft: `auto`,
-                    marginRight: `auto`,
-                    maxWidth: rhythm(24),
-                    padding: `${rhythm(1.5)} ${rhythm(3 / 4)}`
-                }}
-            >
-                <header>{header}</header>
-                <main>{children}</main>
-                <footer>© {new Date().getFullYear()} Tech with Seth</footer>
-            </div>
+            <>
+                <header>
+                    <nav
+                        className="navbar is-dark"
+                        role="navigation"
+                        aria-label="main navigation"
+                    >
+                        <div className="container">
+                            <div className="columns is-centered">
+                                <div className="column is-two-thirds-tablet">
+                                    <div className="navbar-brand">
+                                        <Link
+                                            className="navbar-item logo"
+                                            to={`/`}
+                                        >{`<TWS />`}</Link>
+                                        <a
+                                            role="button"
+                                            className="navbar-burger"
+                                            aria-label="menu"
+                                            aria-expanded="false"
+                                        >
+                                            <span aria-hidden="true"></span>
+                                            <span aria-hidden="true"></span>
+                                            <span aria-hidden="true"></span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+                <main>
+                    <section className="section">
+                        <div className="container">
+                            <div className="columns is-centered is-two-thirds-tablet">
+                                <div className="column is-8">{children}</div>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+                <footer className="footer">
+                    © {new Date().getFullYear()} Tech with Seth
+                </footer>
+            </>
         )
     }
 }
