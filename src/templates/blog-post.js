@@ -29,11 +29,12 @@ class BlogPostTemplate extends React.Component {
                                     : '2rem'
                             }}
                         >
-                            Posted: {post.frontmatter.date}
+                            <strong>Posted:</strong> {post.frontmatter.date}
                         </p>
                         {post.frontmatter.updated && (
                             <p style={{ marginBottom: '2rem' }}>
-                                Updated: {post.frontmatter.updated}
+                                <strong>Updated:</strong>{' '}
+                                {post.frontmatter.updated}
                             </p>
                         )}
                     </header>
