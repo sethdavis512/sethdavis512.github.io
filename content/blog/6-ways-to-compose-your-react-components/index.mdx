@@ -46,12 +46,6 @@ Instead of tunneling there are a variety of ways we can compose components toget
 
 Using the children prop is React's foundational way of composition. The children prop can and should be combined with other forms of composition (i.e. Specialization). Use the children prop to pass child elements directly into the output of the parent.
 
-<Message>
-    In the example below, we solve the prop drilling issue by leveraging
-    composition and passing the function directly to the component instead of
-    passing it through multiple components.
-</Message>
-
 **Usage Notes**
 
 The children prop is a foundational technique to compose components - always use the children props when you can.
@@ -68,6 +62,11 @@ The children prop is a foundational technique to compose components - always use
 
 -   None
 
+<Message>
+    In the example below, we solve the prop drilling issue by leveraging
+    composition and passing the function directly to the component instead of
+    passing it through multiple components.
+</Message>
 <CodePen codePenId="KKdLmGy" />
 
 ### 2. Specialization ([React docs](https://reactjs.org/docs/composition-vs-inheritance.html))
@@ -192,7 +191,9 @@ The best way to share functionality with other components, its function based an
 
 ## In summary...
 
-Adding composition to your React apps will greatly enhance your components flexibility and reusability. When building, my suggestion is to mix and match composition styles to best suite your needs. I tend to gravitate towards using the children prop, specialized components, and custom hooks. I find this combo to be concise. Its all function based, there's no odd syntax. Do you have a favorite combination? Let me know in the comments!
+Adding composition to your React apps will greatly enhance your components flexibility and reusability. When building, my suggestion is to mix and match composition styles to best suite your needs. I tend to gravitate towards using the children prop, specialized components, and custom hooks. I find this combo to be concise. Its all function based, there's no odd syntax. Do you have a favorite combination?
+
+I hope you enjoyed this article - thanks for reading!
 
 ### Additional examples
 
@@ -201,7 +202,7 @@ Adding composition to your React apps will greatly enhance your components flexi
 
 ### Additional links
 
-[A deep dive into children in React](https://mxstbr.blog/2017/02/react-children-deepdive/)
-[When to NOT use Render Props](https://kentcdodds.com/blog/when-to-not-use-render-props)
-[[VIDEO] Never Write Another HOC](https://www.youtube.com/watch?v=BcVAq3YFiuc&feature=youtu.be)
-[[VIDEO] Fun with Hooks](https://www.youtube.com/watch?v=1jWS7cCuUXw)
+-   [A deep dive into children in React](https://mxstbr.blog/2017/02/react-children-deepdive/)
+-   [When to NOT use Render Props](https://kentcdodds.com/blog/when-to-not-use-render-props)
+-   [[VIDEO] Never Write Another HOC](https://www.youtube.com/watch?v=BcVAq3YFiuc&feature=youtu.be)
+-   [[VIDEO] Fun with Hooks](https://www.youtube.com/watch?v=1jWS7cCuUXw)
