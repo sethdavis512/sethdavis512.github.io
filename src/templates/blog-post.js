@@ -9,7 +9,6 @@ import SEO from '../components/seo'
 class BlogPostTemplate extends React.Component {
     render() {
         const post = this.props.data.mdx
-        console.log('post.frontmatter', post.frontmatter)
         const siteTitle = this.props.data.site.siteMetadata.title
         const { previous, next } = this.props.pageContext
 
