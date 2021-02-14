@@ -8,7 +8,7 @@ class Layout extends React.Component {
         const { children } = this.props
 
         return (
-            <>
+            <div className="site-wrapper">
                 <header>
                     <nav
                         className="navbar is-dark"
@@ -51,7 +51,7 @@ class Layout extends React.Component {
                 <footer className="footer">
                     © {new Date().getFullYear()} Tech with Seth
                 </footer>
-            </>
+            </div>
         )
     }
 }
